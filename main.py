@@ -1,6 +1,9 @@
 import os
 import time
 from selenium import webdriver
+from apscheduler.schedulers.blocking import BlockingScheduler
+
+sched = BlockingScheduler()
 
 
 op = webdriver.ChromeOptions()
@@ -12,11 +15,13 @@ op.add_argument("--disable-dev-sh-usage")
 driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=op)
 
 # driver = webdriver.Chrome(executable_path='C:/chromedriver', chrome_options=op) local
-counter = 0
 
-while True:
-    driver.get("https://pat-czyta.blogspot.com/")
-    print("DONE")
-    counter = counter + 1
-    print (counter)
-    time.sleep(200)
+
+@sched.scheduled_job('interval', minutes=3)
+def timed_job():
+    counter = 0
+    while True:
+        driver.get("https://pat-czyta.blogspot.com/")
+        print("DONE")
+        counter = counter + 1
+        print (counter)
