@@ -25,3 +25,6 @@ def timed_job():
         print("DONE")
         counter = counter + 1
         print (counter)
+
+
+sched.start()
