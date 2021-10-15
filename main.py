@@ -5,7 +5,6 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
 
-
 op = webdriver.ChromeOptions()
 op.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 op.add_argument("--headless")
@@ -15,18 +14,18 @@ op.add_argument("--disable-dev-sh-usage")
 driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=op)
 
 # driver = webdriver.Chrome(executable_path='C:/chromedriver', chrome_options=op) local
+counter = 0
 
 
 @sched.scheduled_job('interval', minutes=3)
-counter = 0
 def timed_job():
-        global counter
-        driver.get("https://pat-czyta.blogspot.com/")
-        print("DONE")
-        counter = counter + 1
-        print (counter)
-        time.sleep(10)
-        driver.close()
+    global counter
+    driver.get("https://pat-czyta.blogspot.com/")
+    print("DONE")
+    counter = counter + 1
+    print(counter)
+    time.sleep(10)
+    driver.close()
 
 
 sched.start()
