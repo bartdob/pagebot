@@ -17,7 +17,7 @@ driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), c
 counter = 0
 
 
-@sched.scheduled_job('interval', minutes=3)
+@sched.scheduled_job('interval', minutes=12)
 def timed_job():
     global counter
     driver.get("https://pat-czyta.blogspot.com/")
