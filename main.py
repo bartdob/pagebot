@@ -24,8 +24,6 @@ def timed_job():
     print("DONE")
     counter = counter + 1
     print(counter)
-    time.sleep(10)
-    driver.close()
 
 
 sched.start()
